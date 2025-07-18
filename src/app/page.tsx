@@ -1,103 +1,99 @@
-import Image from "next/image";
+'use client'
+
+import Image from 'next/image'
+import { motion } from 'framer-motion'
+import Link from 'next/link'
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <main className="min-h-screen bg-white px-6 py-16 text-center space-y-24">
+      {/* Hero Section */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="space-y-6"
+      >
+        <h1 className="text-4xl sm:text-6xl font-bold text-blue-700">
+          Welcome to CasePLUS
+        </h1>
+        <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
+          Your all-in-one legal case management platform to create, organize, and track cases effortlessly.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link
+            href="/register"
+            className="bg-blue-600 text-white px-6 py-3 rounded-lg text-lg hover:bg-blue-700 transition"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            Get Started
+          </Link>
+          <Link
+            href="/configure/upload"
+            className="border border-blue-600 text-blue-600 px-6 py-3 rounded-lg text-lg hover:bg-blue-50 transition"
           >
-            Read our docs
-          </a>
+            Create Case
+          </Link>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+       
+      </motion.div>
+
+      {/* Features */}
+      <section className="max-w-5xl mx-auto text-left">
+        <h2 className="text-3xl font-bold text-gray-800 text-center mb-10">Why CasePLUS?</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <Feature
+            title="🧾 Organized Case Tracking"
+            desc="Keep all your documents, dates, and deadlines neatly organized in one dashboard."
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
+          <Feature
+            title="🔒 Secure & Private"
+            desc="All your data is encrypted and safely stored — built with security-first mindset."
           />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
+          <Feature
+            title="📱 Accessible Anywhere"
+            desc="Manage cases from mobile, tablet, or desktop. Your cases, always within reach."
           />
-          Go to nextjs.org →
-        </a>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="max-w-4xl mx-auto">
+        <h2 className="text-3xl font-bold text-gray-800 mb-10 text-center">What People Say</h2>
+        <div className="grid sm:grid-cols-2 gap-6">
+          <Testimonial
+            name="Adv. Priya Sharma"
+            text="CasePLUS saves me hours every week. Everything is so organized and accessible."
+          />
+          <Testimonial
+            name="Ravi Jain"
+            text="Great experience managing legal documents for my firm. Secure, fast, and reliable."
+          />
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-100 py-10 text-center mt-20">
+        <p className="text-gray-500">© {new Date().getFullYear()} CasePLUS. All rights reserved.</p>
+        <div className="flex justify-center gap-6 mt-4 text-sm text-gray-600">
+          <Link href="/privacy">Privacy Policy</Link>
+          <Link href="/terms">Terms of Service</Link>
+          <Link href="/contact">Contact</Link>
+        </div>
       </footer>
-    </div>
-  );
+    </main>
+  )
 }
+
+const Feature = ({ title, desc }: { title: string; desc: string }) => (
+  <div className="p-6 border rounded-lg shadow hover:shadow-md transition">
+    <h3 className="text-xl font-semibold text-blue-700 mb-2">{title}</h3>
+    <p className="text-gray-600">{desc}</p>
+  </div>
+)
+
+const Testimonial = ({ name, text }: { name: string; text: string }) => (
+  <div className="bg-white p-6 border rounded-lg shadow">
+    <p className="text-gray-700 italic">“{text}”</p>
+    <p className="mt-4 text-sm text-gray-500">– {name}</p>
+  </div>
+)

@@ -1,0 +1,102 @@
+generator client {
+  provider = "prisma-client-js"
+  // output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Configuration {
+  id              String        @id @default(cuid())
+  height          Int
+  width           Int
+  color           CaseColor?
+  finish          CaseFinish?
+  material        CaseMaterial?
+  phone           PhoneModel?
+  imageUrl        String
+  croppedImageUrl String?
+  Order           Order[]
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Order     Order[]
+}
+
+model Order {
+  id                String           @id @default(cuid())
+  configurationId   String
+  userId            String
+  amount            Float
+  isPaid            Boolean          @default(false)
+  status            OrderStatus      @default(awaiting_shipment)
+  shippingAddressId String?
+  billingAddressId  String?
+  createdAt         DateTime         @default(now())
+  updated           DateTime         @updatedAt
+  billingAddress    BillingAddress?  @relation(fields: [billingAddressId], references: [id])
+  configuration     Configuration    @relation(fields: [configurationId], references: [id])
+  shippingAddress   ShippingAddress? @relation(fields: [shippingAddressId], references: [id])
+  user              User             @relation(fields: [userId], references: [id])
+}
+
+model ShippingAddress {
+  id          String  @id @default(cuid())
+  name        String
+  state       String?
+  city        String
+  street      String
+  postalCode  String
+  country     String
+  phoneNumber String?
+  orders      Order[]
+}
+
+model BillingAddress {
+  id          String  @id @default(cuid())
+  name        String
+  state       String?
+  city        String
+  street      String
+  postalCode  String
+  country     String
+  phoneNumber String?
+  orders      Order[]
+}
+
+enum OrderStatus {
+  fulfilled
+  shipped
+  awaiting_shipment
+}
+
+enum PhoneModel {
+  iphonex
+  iphone11
+  iphone12
+  iphone13
+  iphone14
+  iphone15
+}
+
+enum CaseMaterial {
+  silicone
+  polycarbonate
+}
+
+enum CaseFinish {
+  smooth
+  textured
+}
+
+enum CaseColor {
+  black
+  blue
+  rose
+}
