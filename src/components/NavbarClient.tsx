@@ -8,7 +8,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 interface NavbarClientProps {
-  user: any;
+  user?: Record<string, unknown> | null;
 }
 
 const NavbarClient = ({ user }: NavbarClientProps) => {
